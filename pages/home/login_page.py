@@ -5,13 +5,39 @@ class LoginPage():
     def __init__(self, driver):
         self.driver = driver
 
-    def login(self, username, password):
-        loginLink = self.driver.find_element(By.LINK_TEXT, "Login")
-        emailField = self.driver.find_element(By.ID, "user_email")
-        passwordField = self.driver.find_element(By.ID, "user_password")
-        loginButton = self.driver.find_element(By.NAME, "commit")
-        
-        loginLink.click()
-        emailField.send_keys(username)
-        passwordField.send_keys(password)
-        loginButton.click()
+    # Locators
+    _login_link = "Login"
+    _email_field = "user_email"
+    _password_field = "user_password"
+    _login_button = "commit"
+
+    # Selectors
+    def getLoginLink(self):
+        return self.driver.find_element(By.LINK_TEXT, self._login_link)
+    def getEmailField(self):
+        return self.driver.find_element(By.ID, self._email_field)
+    def getPasswordField(self):
+        return self.driver.find_element(By.ID, self._user_password)
+    def getLoginButton(self):
+        return self.driver.find_element(By.NAME, self._login_button)
+
+    # Actions
+    def clickLoginLink(self):
+        self.getLoginLink().click()
+        print "clicked on login link"
+    def enterEmail(self, email):
+        self.getEmailField.send_keys(email)
+        print "entered email: " + email
+    def enterPassword(self, password):
+        self.getPasswordField().send_keys(password)
+        print "entered password: " + password
+    def clickLoginButton(self):
+        self.getLoginButton.click()
+        print "clicked on login button"
+
+    # Methods
+    def login(self, email, password):
+        self.clickLoginLink()
+        self.enterEmail(email)
+        self.enterPassword(password)
+        self.clickLoginButton()
