@@ -31,6 +31,8 @@ class LoginPage(BasePage):
         return self.driver.find_element(By.XPATH, self._user_icon)
     def getLoginErrorMessage(self):
         return self.driver.find_element(By.XPATH, self._login_error_message)
+    def getTitle(self):
+        return self.driver.title
 
     # Actions
     def clickLoginLink(self):
@@ -54,11 +56,18 @@ class LoginPage(BasePage):
         self.clickLoginButton()
 
     # Assertions
+    def verifyLoginPageTitle(self):
+        title = self.getTitle()
+        if title == "Sample Page Title":
+            result = True
+        else:
+            result = False
+        self.verify(result, "Passed", "Incorrect Page Title")
     def verifyLoginSuccessful(self):
         userIcon = self.getUserIcon()
         result = self.isElementPresent(userIcon)
-        return result
+        self.verify(result, "Passed", "Login Failed")
     def verifyLoginFailed(self):
         errorMessage = self.getLoginErrorMessage()
         result = self.isElementPresent(errorMessage)
-        return result
+        self.verify(result, "Passed", "Logged in Invalidly")

@@ -15,14 +15,10 @@ class LoginTests(unittest.TestCase):
     def test_validLogin(self):
         self.lp
             .login("test@email.com", "abcabc")
-
-        result = self.lp.verifyLoginSuccessful()
-        assert result == True
+            .verifyLoginSuccessful()
 
     @pytest.mark.run(order=1)
     def test_invalidLogin(self):
         self.lp
             .login(password="abcabc")
-
-        result = self.lp.verifyLoginFailed()
-        assert result == True
+            .verifyLoginFailed()
