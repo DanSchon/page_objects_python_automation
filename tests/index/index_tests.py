@@ -7,7 +7,7 @@ import pytest
 class IndexTests(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
-    def classSetup(self, oneTimeSetUp):
+    def objectSetup(self, oneTimeSetUp):
         self.index_page = IndexPage(self.driver)
         self.login_page = LoginPage(self.driver)
 

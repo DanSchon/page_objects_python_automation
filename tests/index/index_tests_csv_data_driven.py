@@ -3,10 +3,11 @@ from pages.home.login_page import LoginPage
 import unittest
 import pytest
 from ddt import ddt, data, unpack
+from utilities.read_csv_data import getCSVData
 
 @pytest.mark.usefixtures("oneTimeSetUp", "setUp")
 @ddt
-class RegisterMultipleCoursesTests(unittest.TestCase):
+class RegisterCoursesCSVDataTests(unittest.TestCase):
 
     @pytest.fixture(autouse=True)
     def objectSetup(self, oneTimeSetUp):
@@ -19,8 +20,11 @@ class RegisterMultipleCoursesTests(unittest.TestCase):
             .login("test@email.com", "abcabc")
             .verifyLoginSuccessful()
 
-    @pytest.mark.run(order=2)
-    @data(("Programming for Dummies", "4242424242424242", "1220", "100"), ("Programming for Geniuses", "2424242424242424", "0120", "200"))
+    def setUp(self):
+        self.driver.find_element_by_link_text("All Courses").click()
+
+    @pytest.mark.run(order=1)
+    @data(*getCSVData("/Users/danielschonfeld/Desktop/page_objects_python/testdata.csv"))
     @unpack
     def test_invalidEnrollment(self, courseName, ccNum, ccExp, ccCVV):
         self.index_page
@@ -30,5 +34,3 @@ class RegisterMultipleCoursesTests(unittest.TestCase):
             .verifyEnrollFailed()
             
         self.index_page.clickOnAllCoursesLink()    # so that next iteration can find search bar successfully
-
-
