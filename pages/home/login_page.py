@@ -1,6 +1,8 @@
 from selenium.webdriver.common.by import By 
 import utilities.custom_logger as cl
 import logging
+import unittest
+from base.basepage import BasePage
 
 class LoginPage(BasePage):
 
@@ -54,6 +56,7 @@ class LoginPage(BasePage):
         self.enterEmail(email)
         self.enterPassword(password)
         self.clickLoginButton()
+        return self
 
     # Assertions
     def verifyLoginPageTitle(self):

@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import *
 import utilities.custom_logger as cl
 import logging
+import unittest
 
 class BasePage():
 
@@ -89,3 +90,12 @@ class BasePage():
             self.log.info("Element not appeared on the web page")
             self.log.info_stack()
         return element
+
+    def pageScroll(self, direction="down"):
+        if direction == "up":
+            # Scroll Up
+            self.driver.execute_script("window.scrollBy(0, -1000);")
+
+        if direction == "down":
+            # Scroll Down
+            self.driver.execute_script("window.scrollBy(0, 1000);")
