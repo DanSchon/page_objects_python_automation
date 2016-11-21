@@ -22,6 +22,7 @@ class IndexPage(BasePage):
     _cc_cvv = "cc_cvc"
     _submit_button = "//div[@id='new_card']//button[contains(text(),'Enroll in Course')]"
     _enroll_error_message = "//div[@id='new_card']//div[contains(text(),'The card number is not a valid credit card number.')]"
+    _all_courses_link = "All Courses"
 
     # Selectors
     def getSearchBar(self):
@@ -43,6 +44,8 @@ class IndexPage(BasePage):
         return messageElement
     def getTitle(self):
         return self.driver.title
+    def getAllCoursesLink(self):
+        return self.driver.find_element_by_link_text(self._all_courses_link)
 
     # Actions
     def enterCourseNameInSearchBar(self, name):
@@ -61,6 +64,8 @@ class IndexPage(BasePage):
         self.getCreditCardCvvField.send_keys(cvv)
     def clickEnrollSubmitButton(self):
         self.getSubmitButton().click()
+    def clickOnAllCoursesLink(self):
+        self.getAllCoursesLink().click()
 
     # Methods
     def enterCreditCardInformation(self, num, exp, cvv):
