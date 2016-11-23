@@ -50,6 +50,6 @@ class MouseHoveringPage(BasePage):
 
     # Assertions    
     def verifyUserLoggedOutSuccessfully(self):
-        LogoutMessageElement = self.waitForElement(self._logout_message, locatorType="class")
+        LogoutMessageElement = self.waitForElement(self._logout_message, locatorType="xpath")
         result = LogoutMessageElement.is_displayed()
         self.verify(result, "Passed", "Log Out Was Not Successful")
