@@ -30,7 +30,7 @@ class DragAndDropPage(BasePage):
 
     # Actions - Both Work
     def dragAndDropElementToTarget_1(self):
-        actions = ActionChains(driver)
+        actions = ActionChains(self.driver)
         actions.drag_and_drop(self.draggableElement(), self.droppableElement()).perform()
         self.log.info("Item was dragged and dropped into target using drag_and_drop action method")
         return self
