@@ -5,7 +5,6 @@ import unittest
 from base.basepage import BasePage
 
 from selenium.webdriver import ActionChains
-import time
 
 class DragAndDropPage(BasePage):
 
@@ -29,7 +28,6 @@ class DragAndDropPage(BasePage):
         actions = ActionChains(self.driver)
         actions.drag_and_drop_by_offset(element, 100, 0).perform()
         self.log.info("Moved slider handle to middle of slide bar")
-        time.sleep(2)
         return self
 
     # Assertions    
