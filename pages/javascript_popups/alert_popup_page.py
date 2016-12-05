@@ -23,6 +23,7 @@ class AlertPopupPage(BasePage):
     # Actions
     def clickOnAlertButton(self):
         self.getAlertButton().click()
+        return self
 
     # Methods
     def acceptJavaScriptAlertPopup(self):

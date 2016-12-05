@@ -23,6 +23,7 @@ class ConfirmPopupPage(BasePage):
     # Actions
     def clickOnConfirmButton(self):
         self.getAlertButton().click()
+        return self
 
     # Methods
     def acceptJavaScriptConfirmPopup(self):

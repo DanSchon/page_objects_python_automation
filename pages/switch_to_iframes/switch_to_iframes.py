@@ -21,26 +21,27 @@ class SwitchToIframe(BasePage):
     
     def switchToIframeUsingNumbers(self):   # if the iFrame does not have an id or name, use its number to locate it. 
         self.driver.switch_to.frame(0)      # if there is only one iFrame, its number is 0
-                                            # if there are multiple iFrames, find them by their index number (by order of appearance - ex: higher in the page lower their index number is)
+        return self                         # if there are multiple iFrames, find them by their index number (by order of appearance - ex: higher in the page lower their index number is)
     def switchToIframeUsingID(self):
         self.driver.switch_to.frame(self._iframe_id)
-
+        return self
     def switchToIframeUsingName(self):
         self.driver.switch_to.frame(self._iframe_name)
-
+        return self
 
     def switchBackToParentFrame(self):
-        self.switch_to.default_content()
-
+        self.driver.switch_to.default_content()
+        return self
     # Methods
     def switchToIframePerformSomeActionSwitchBackToParentFrame(self):
         self.switchToIframeUsingNumbers()
         # The elements of the iframe are now accessible by selenium webdriver 
         # perform the action
-        searchBox = driver.find_element(By.ID, "search-courses")
+        searchBox = self.driver.find_element(By.ID, self._search_box_selector)
         searchBox.send_keys("python")
         # Switch back to the parent frame
         driver.switchBackToParentFrame()
+        return self
 
     # Assertions
     def switchToIframeVerifyThatSearchBoxWorkedSwitchBackToParentFrame(self):
@@ -51,4 +52,5 @@ class SwitchToIframe(BasePage):
         self.verify(result, "Passed", "Search box did not work correctly")
         # Switch back to the parent frame
         self.switchBackToParentFrame()
+        return self
 
